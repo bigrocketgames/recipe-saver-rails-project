@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RecipeSaverRailsProject</title>
+    <title>Recipe Saver Rails Project</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,7 +9,8 @@
   </head>
 
   <body>
-    <%= render 'messages' %>
+    <!-- TODO - add partial for navigation using bootstrap -->
+    <%= render 'layouts/messages' %>
     <%= yield %>
   </body>
 </html>
