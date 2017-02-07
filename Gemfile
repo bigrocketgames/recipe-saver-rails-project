@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Using devise for authentication
 gem 'devise'
+gem 'omniauth-facebook'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
