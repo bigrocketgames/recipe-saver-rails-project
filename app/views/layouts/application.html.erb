@@ -9,8 +9,10 @@
   </head>
 
   <body>
-    <!-- TODO - add partial for navigation using bootstrap -->
-    <%= render 'layouts/messages' %>
-    <%= yield %>
+    <%= render 'layouts/navigation' %>
+    <div class="container">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
   </body>
 </html>
