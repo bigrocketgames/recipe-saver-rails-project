@@ -1,0 +1,5 @@
+<% if current_user %>
+  <%= link_to "Recipe Saver", recipes_path, class: "navbar-brand" %>
+<% else %>
+  <%= link_to "Recipe Saver", home_path, class: "navbar-brand" %>
+<% end %>
