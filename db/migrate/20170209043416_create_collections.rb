@@ -5,7 +5,7 @@ class CreateCollections < ActiveRecord::Migration[5.0]
       t.integer :cook_id
       t.integer :food_id
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
