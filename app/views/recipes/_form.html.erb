@@ -16,7 +16,15 @@
   <%= f.label :description, "Description: " %>
   <%= f.text_area :description %> <br> <br>
   <%= f.label :instructions, "Instructions: " %>
-  <%= f.text_area :instructions %>
+  <%= f.text_area :instructions %> <br><br>
+
+    <%= f.fields_for :quantities do |quantity| %>
+      <%= render 'quantity_fields', f: quantity %>
+    <% end %>
+    <%= link_to_add_association 'Add Ingredient', f, :quantities %>
   <!-- Need to add nested element for ingredients and quantity of the ingredient in the recipe. -->
+
+  <br><br>
+
   <%= f.submit %>
 <% end %>
