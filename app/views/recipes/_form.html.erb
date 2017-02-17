@@ -10,8 +10,13 @@
     </div>
   <% end %>
 
+  <%= f.hidden_field :user_id, { value: current_user.id }  %>
   <%= f.label :name, "Name: " %>
   <%= f.text_field :name %> <br> <br>
+  <%= f.label :description, "Description: " %>
+  <%= f.text_area :description %> <br> <br>
+  <%= f.label :instructions, "Instructions: " %>
+  <%= f.text_area :instructions %>
   <!-- Need to add nested element for ingredients and quantity of the ingredient in the recipe. -->
   <%= f.submit %>
 <% end %>

@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :get_recipe, only: [:show, :edit, :update]
+
 
   def index
     @recipes = Recipe.all
@@ -6,6 +8,9 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+  end
+
+  def show
   end
 
   def create
@@ -19,8 +24,12 @@ class RecipesController < ApplicationController
 
   private
 
+  def get_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
   def recipe_params
-    params.require(:recipe).permit(:name)
+    params.require(:recipe).permit(:name, :user_id, :description, :instructions)
   end
 
 end
