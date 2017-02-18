@@ -30,7 +30,7 @@
     <%= f.fields_for :quantities do |quantity| %>
       <%= render 'quantity_fields', f: quantity %>
     <% end %>
-    <%= link_to_add_association 'Add Ingredient', f, :quantities %>
+    <%= link_to_add_association 'Add Ingredient', f, :quantities, wrap_object: Proc.new {|quantity| quantity.build_ingredient; quantity } %>
   </div>
   <!-- Need to add nested element for ingredients and quantity of the ingredient in the recipe. -->
 
