@@ -1,8 +1,10 @@
 <% @recipes.each do |r| %>
   <div class="row">
-    <div class="col-xs-1 col-md-4 col-lg-3">
-      <h4 class="text-center"><%= r.name %></h4> <br>
-      <p><%= pluralize(r.ingredients.count, "Ingredient") %></p>
+    <div class="col-sm-4 col-lg-3">
+      <a href="recipes/<%= r.id %>">
+        <h4 class="text-center"><%= r.name %></h4> <br>
+        <p><%= pluralize(r.ingredients.count, "Ingredient") %></p>
+      </a>
     </div>
   </div>
 <% end %>
