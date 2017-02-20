@@ -14,10 +14,10 @@ class RecipesController < ApplicationController
   end
 
   def create
-    
+
     @recipe = Recipe.create(recipe_params)
     if @recipe.save
-      redirect_to recipe_path(@recipe)
+      redirect_to user_recipe_path(current_user, @recipe)
     else
       render :new
     end

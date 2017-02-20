@@ -1,0 +1,17 @@
+<%= form_for :collection, url: user_collections_path(current_user.id), method: :post do |f| %>
+  <%= f.hidden_field :cook_id, { value: current_user.id } %>
+  <%= f.hidden_field :recipe_id, { value: r.id } %>
+  <%= f.label :id, "Collection Name: " %>
+  <%= f.collection_select(:id, current_user.collections, :id, :name, prompt: "Please Select") %>
+  <br>
+  <%= f.submit "Add To Collection" %>
+<% end %>
+
+<%= form_for :collection, url: user_collections_path(current_user.id), method: :post do |f| %>
+  <%= f.hidden_field :cook_id, { value: current_user.id } %>
+  <%= f.hidden_field :recipe_id, { value: r.id } %>
+  <%= f.label :name, "New Collection Name: " %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.submit "Create New Collection" %>
+<% end %>
