@@ -3,8 +3,15 @@
     <div class="col-sm-4 col-lg-3">
       <a href="recipes/<%= r.id %>">
         <h4 class="text-center"><%= r.name %></h4> <br>
-        <p><%= pluralize(r.ingredients.count, "Ingredient") %></p>
+        <p class="text-center"><%= pluralize(r.ingredients.count, "Ingredient") %></p>
       </a>
+
+      <%= form_for :collection, url: user_collections_path(current_user.id), method: :post do |f| %>
+        <%= f.hidden_field :cook_id, { value: current_user.id } %>
+        <%= f.hidden_field :food_id, { value: r.id } %>
+        <%= f.collection_select(:id, Collection.all.where("cook_id = ?", current_user.id), :id, :name, allow_blank: true) %>
+        <%= f.submit "Add To Collection" %>
+      <% end %>
     </div>
   </div>
 <% end %>
