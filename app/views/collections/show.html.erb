@@ -1,2 +1,4 @@
 <h1><%= @collection.name %></h1>
-<p><%= @collection.food.name %></p>
+<% @collection.recipes.each do |r| %>
+  <%= r.name %>
+<% end %>

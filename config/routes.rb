@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   root 'user#index', as: 'home'
 
-  resources :recipes, only: [:index, :show, :create]
-  resources :collections, only: [:create, :update]
+  resources :recipes, only: [:index, :show]
 
   resources :user, only: [:show] do
-    resources :collections, only: [:index, :show, :new, :create, :edit]
+    resources :collections, only: [:index, :show, :new, :create, :edit, :update]
     resources :recipes, only: [:index, :show, :new, :edit, :update]
   end
 
