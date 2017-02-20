@@ -9,8 +9,16 @@
       <%= form_for :collection, url: user_collections_path(current_user.id), method: :post do |f| %>
         <%= f.hidden_field :cook_id, { value: current_user.id } %>
         <%= f.hidden_field :food_id, { value: r.id } %>
-        <%= f.collection_select(:id, Collection.all.where("cook_id = ?", current_user.id), :id, :name, allow_blank: true) %>
+        <%= f.collection_select(:id, Collection.all.where("cook_id = ?", current_user.id), :id, :name, prompt: "Please Select") %>
         <%= f.submit "Add To Collection" %>
+      <% end %>
+
+      <%= form_for :collection, url: user_collections_path(current_user.id), method: :post do |f| %>
+        <%= f.hidden_field :cook_id, { value: current_user.id } %>
+        <%= f.hidden_field :food_id, { value: r.id } %>
+        <%= f.label :name, "New Collection Name: " %>
+        <%= f.text_field :name %>
+        <%= f.submit "Create New Collection" %>
       <% end %>
     </div>
   </div>

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :recipes
-  has_many :collections
+  has_many :collections, foreign_key: :cook_id
   has_many :foods, through: :collections, class_name: 'Recipe'
 
   def self.from_omniauth(auth)
