@@ -1,5 +1,5 @@
-<p>Show collections list.</p>
+<h1 class="text-center">Your Collections</h1>
 
 <% @collections.each do |c| %>
-  <p><%= c.name %></p>
+  <h4><%= link_to "#{c.name}", user_collection_path(current_user, c) %></h4>
 <% end %>
