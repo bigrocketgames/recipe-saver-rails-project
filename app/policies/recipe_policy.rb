@@ -1,8 +1,8 @@
 class RecipePolicy < ApplicationPolicy
 
   class Scope < scope
-    def most_cooked
-      
+    def resolve
+      scope.order(collected: :desc)
     end
   end
 
