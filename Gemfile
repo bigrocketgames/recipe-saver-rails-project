@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Using devise for authentication
 gem 'devise'
-gem 'omniauth-facebook'
+gem 'omniauth-github'
 
 gem 'cocoon'
 gem 'pundit'
