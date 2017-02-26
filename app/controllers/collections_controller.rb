@@ -17,7 +17,10 @@ class CollectionsController < ApplicationController
   def create
     if !params[:collection][:id]
       collection = Collection.new(collection_params)
+      recipe = Recipe.find(params[:collection][:recipe_id])
+      collection.recipes << recipe
       if collection.save
+        recipe.update(collected_count: recipe.collections.count)
         flash[:notice] = "Your #{collection.name} collection created successfully!"
         redirect_to user_collection_path(params[:collection][:cook_id], collection)
       else
@@ -30,6 +33,7 @@ class CollectionsController < ApplicationController
       if !collection.recipes.include?(recipe)
         collection.recipes << recipe
         if collection.save
+          recipe.update(collected_count: recipe.collections.count)
           flash[:notice] = "The recipe was successfully added to your collection."
           redirect_to recipes_path
         else
