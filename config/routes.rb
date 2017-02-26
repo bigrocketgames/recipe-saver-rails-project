@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'user#index', as: 'home'
+  root 'static#home', as: 'home'
   get '/recipes/most_collected', to: 'recipes#most_collected'
 
   resources :recipes, only: [:index, :show]
