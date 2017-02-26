@@ -1,8 +1,8 @@
 class RecipePolicy < ApplicationPolicy
 
-  class Scope < scope
+  class Scope < Scope
     def resolve
-      scope.order(collected: :desc)
+      scope.where("collected_count > 0").order(collected_count: :desc)
     end
   end
 

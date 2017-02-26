@@ -1,6 +1,9 @@
 class RecipesController < ApplicationController
   before_action :get_recipe, only: [:show, :edit, :update]
 
+  def most_collected
+    @recipes = policy_scope(Recipe)
+  end
 
   def index
     @recipes = Recipe.all
