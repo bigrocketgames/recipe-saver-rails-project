@@ -1,9 +1,9 @@
 <div class="row">
   <% @recipes.each do |r| %>
     <div class="col-sm-4 col-lg-3">
-      <a href="<%= r.id %>">
+      <a href="recipes/<%= r.id %>">
         <h4 class="text-center"><%= r.name %></h4>
-        <p class="text-center"><%= pluralize(r.collections.count, "Collection") %></p>
+        <p class="text-center"><%= pluralize(r.ingredients.count, "Ingredient") %></p>
       </a>
 
       <%= render partial: 'collections_form', locals: {r: r} %>

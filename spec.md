@@ -12,13 +12,13 @@ Specs:
 - [x] Include signup (Devise)
 - [x] Include login (Devise)
 - [x] Include logout (Devise)
-- [ ] Include third party signup/login (Devise/OmniAuth)
+- [x] Include third party signup/login (Devise/OmniAuth)
 - [x] Include nested resource show or index (user/:user_id/collections, user/:user_id/recipes)
 - [x] Include nested resource "new" form (user/:user_id/recipes/new)
 - [x] Include form display of validation errors (form user/:user_id/recipes/new)
 
 Confirm:
-- [ ] The application is pretty DRY
-- [ ] Limited logic in controllers
-- [ ] Views use helper methods if appropriate
-- [ ] Views use partials if appropriate
+- [x] The application is pretty DRY
+- [x] Limited logic in controllers
+- [x] Views use helper methods if appropriate
+- [x] Views use partials if appropriate

@@ -47,10 +47,6 @@ class CollectionsController < ApplicationController
     end
   end
 
-  def update
-    raise params.inspect
-  end
-
   private
 
   def collection_params
