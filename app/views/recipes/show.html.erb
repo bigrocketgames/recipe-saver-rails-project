@@ -8,3 +8,7 @@
 
 <h3>Instructions</h3>
 <p><%= @recipe.instructions %></p>
+
+<% if current_user.id == @recipe.user_id %>
+  <%= link_to "Delete Recipe", @recipe, method: :delete %>
+<% end %>

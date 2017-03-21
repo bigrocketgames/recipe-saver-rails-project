@@ -22,11 +22,21 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
+    @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       redirect_to user_recipe_path(current_user, @recipe)
     else
       render :new
+    end
+  end
+
+  def destroy
+    recipe = Recipe.find(params[:id])
+    if current_user.id == recipe.user_id
+      recipe.destroy
+      redirect_to recipes_path
+    else
+      redirect_back
     end
   end
 
