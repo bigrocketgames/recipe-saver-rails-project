@@ -4,11 +4,6 @@ class RecipesController < ApplicationController
     @recipes = policy_scope(Recipe)
   end
 
-  def user_recipes_index
-    user = User.find(params[:user_id])
-    @recipes = user.recipes
-  end
-
   def index
     if (params[:user_id])
       user = User.find(params[:user_id])
