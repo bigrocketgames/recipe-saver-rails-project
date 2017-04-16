@@ -39,6 +39,9 @@ gem 'omniauth-github'
 gem 'cocoon'
 gem 'pundit'
 
+# Use AMS for serializing data for use with jQuery and Ajax
+gem 'active_model_serializers'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
