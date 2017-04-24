@@ -1,6 +1,7 @@
 <h3 class="text-center"> User: <strong><%= @user.email %></strong> </h3>
 
 <%= link_to "See Your Recipes", user_recipes_path(@user), class: "get_user_recipes" %>
+<%= link_to "Hide Your Recipes", "#", class: "hide_user_recipes" %>
 
 <div id="recipes">
   <ol id="recipe_list">
