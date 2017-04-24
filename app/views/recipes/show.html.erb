@@ -7,7 +7,15 @@
 <% end %>
 
 <h3>Instructions</h3>
-<p><%= @recipe.instructions %></p>
+<p><%= @recipe.instructions %></p> <br>
+
+<% if @recipe == Recipe.all.first %>
+  <p><%= link_to "Next Recipe", "#", class: "js-next", data: { id: Recipe.all.find_index(@recipe) } %> &rarr;</p> <br>
+<% elsif @recipe == Recipe.all.last %>
+ <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: Recipe.all.find_index(@recipe) } %></p> <br>
+<% else %>
+  <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: Recipe.all.find_index(@recipe) } %> &emsp; &emsp; &emsp; &emsp; <%= link_to "Next Recipe", "#", class: "js-next", data: { id: Recipe.all.find_index(@recipe) } %> &rarr;</p> <br>
+<% end %>
 
 <% if current_user.id == @recipe.user_id %>
   <%= link_to "Delete Recipe", @recipe, method: :delete %>
