@@ -8,6 +8,10 @@ class RecipesController < ApplicationController
     if (params[:user_id])
       user = User.find(params[:user_id])
       @recipes = user.recipes
+      respond_to do |format|
+        format.json { render json: @recipes }
+        format.html { render :index }
+      end
     else
       @recipes = Recipe.all
     end
