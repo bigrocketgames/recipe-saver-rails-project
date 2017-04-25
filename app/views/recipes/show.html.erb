@@ -11,13 +11,7 @@
 <h3>Instructions</h3>
 <p id="recipe-instructions"><%= @recipe.instructions %></p> <br>
 
-<% if @recipe == Recipe.all.first %>
-  <p><%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %> &rarr;</p> <br>
-<% elsif @recipe == Recipe.all.last %>
- <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: @recipe.id } %></p> <br>
-<% else %>
-  <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: @recipe.id } %> &emsp; &emsp; &emsp; &emsp; <%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %> &rarr;</p> <br>
-<% end %>
+<p id="view-links"><%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: @recipe.id } %> <span id="link-span">&emsp; &emsp; &emsp; &emsp;</span>  <%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %></p> <br>
 
 <% if current_user.id == @recipe.user_id %>
   <%= link_to "Delete Recipe", @recipe, method: :delete %>
@@ -25,9 +19,58 @@
 
 <script type="text/javascript" charset="utf-8">
  $(function () {
+   if (<%= @recipe.id %> === <%= Recipe.all.first.id %>)
+   {
+     $(".js-next").show();
+     $("#link-span").hide();
+     $(".js-prev").hide();
+   } else if (<%= @recipe.id %> === <%= Recipe.all.last.id %>) 
+   {
+     $(".js-next").hide();
+     $("#link-span").hide();
+     $(".js-prev").show();
+   } else 
+   {
+     $(".js-next").show();
+     $("#link-span").show();
+     $(".js-prev").show();
+   }
+
+
    $(".js-next").on("click", function(e) {
     e.preventDefault();
-    alert("You are here");
+    var nextId = parseInt($(".js-prev").attr("data-id")) + 1;
+     $.get("/recipes/" + nextId + ".json", function(json) {
+       $("#recipe-name").text(json["name"]);
+       $("#recipe-description").text(json["description"]);
+       $("#recipe-instructions").text(json["instructions"]);
+       $("#ingredient-list").empty();
+       var quantityArr = json["quantities"];
+       quantityArr.forEach(function(q) {
+        $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
+      }, this);
+
+       //reset the data-id to the new recipe id
+       $(".js-next").attr("data-id", json["id"]);
+       $(".js-prev").attr("data-id", json["id"]);
+
+      if (json["id"] === <%= Recipe.all.first.id %>)
+      {
+        $(".js-next").show();
+        $("#link-span").hide();
+        $(".js-prev").hide();
+      } else if (json["id"] === <%= Recipe.all.last.id %>) 
+      {
+        $(".js-next").hide();
+        $("#link-span").hide();
+        $(".js-prev").show();
+      } else 
+      {
+        $(".js-next").show();
+        $("#link-span").show();
+        $(".js-prev").show();
+      }
+    });
    });
 
    $(".js-prev").on("click", function(e) {
@@ -46,27 +89,25 @@
        //reset the data-id to the new recipe id
        $(".js-next").attr("data-id", json["id"]);
        $(".js-prev").attr("data-id", json["id"]);
+
+      if (json["id"] === <%= Recipe.all.first.id %>)
+      {
+        $(".js-next").show();
+        $("#link-span").hide();
+        $(".js-prev").hide();
+      } else if (json["id"] === <%= Recipe.all.last.id %>) 
+      {
+        $(".js-next").hide();
+        $("#link-span").hide();
+        $(".js-prev").show();
+      } else 
+      {
+        $(".js-next").show();
+        $("#link-span").show();
+        $(".js-prev").show();
+      }
+      
      });
    });
  });
-</script>
-
-
-
-<script type="text/javascript" charset="utf-8">
-// Do not use below code and delete when updated ajax implemented
-//$(function () {
-  //$(".js-next").on("click", function(event) {
-    //event.preventDefault();
-    //var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-    //$.get("/products/" + nextId + ".json", function(data) {
-      //$(".productName").text(data["name"]);
-      //$(".productPrice").text(data["price"]);
-      //$(".productDescription").text(data["description"]);
-      //$(".productInventory").text(data["inventory"]);
-      // re-set the id to current on the link
-      //$(".js-next").attr("data-id", data["id"]);
-    //});
-  //});
-//});
 </script>
