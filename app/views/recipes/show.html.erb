@@ -4,12 +4,12 @@
 <h3>Ingredients</h3>
 <ul id="ingredient-list">
   <% @recipe.quantities.each do |q| %>
-    <li class="ingredient-item"><%= q.amount + " " + q.ingredient.name %></li>
+    <li class="ingredient-item"><%= q.amount + " - " + q.ingredient.name %></li>
   <% end %>
 </ul>
 
 <h3>Instructions</h3>
-<p><%= @recipe.instructions %></p> <br>
+<p id="recipe-instructions"><%= @recipe.instructions %></p> <br>
 
 <% if @recipe == Recipe.all.first %>
   <p><%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %> &rarr;</p> <br>
@@ -34,10 +34,18 @@
      e.preventDefault();
      var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
      $.get("/recipes/" + prevId + ".json", function(json) {
-       debugger
        $("#recipe-name").text(json["name"]);
        $("#recipe-description").text(json["description"]);
+       $("#recipe-instructions").text(json["instructions"]);
        $("#ingredient-list").empty();
+       var quantityArr = json["quantities"];
+       quantityArr.forEach(function(q) {
+        $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
+      }, this);
+
+       //reset the data-id to the new recipe id
+       $(".js-next").attr("data-id", json["id"]);
+       $(".js-prev").attr("data-id", json["id"]);
      });
    });
  });
