@@ -34,7 +34,10 @@
      e.preventDefault();
      var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
      $.get("/recipes/" + prevId + ".json", function(json) {
-      debugger
+       debugger
+       $("#recipe-name").text(json["name"]);
+       $("#recipe-description").text(json["description"]);
+       $("#ingredient-list").empty();
      });
    });
  });
