@@ -1,22 +1,61 @@
-<h1><%= @recipe.name %></h1>
-<p><%= @recipe.description %></p>
+<h1 id="recipe-name"><%= @recipe.name %></h1>
+<p id="recipe-description"><%= @recipe.description %></p>
 
 <h3>Ingredients</h3>
-<% @recipe.quantities.each do |q| %>
-  <p><%= q.amount + " " + q.ingredient.name %></p>
-<% end %>
+<ul id="ingredient-list">
+  <% @recipe.quantities.each do |q| %>
+    <li class="ingredient-item"><%= q.amount + " " + q.ingredient.name %></li>
+  <% end %>
+</ul>
 
 <h3>Instructions</h3>
 <p><%= @recipe.instructions %></p> <br>
 
 <% if @recipe == Recipe.all.first %>
-  <p><%= link_to "Next Recipe", "#", class: "js-next", data: { id: Recipe.all.find_index(@recipe) } %> &rarr;</p> <br>
+  <p><%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %> &rarr;</p> <br>
 <% elsif @recipe == Recipe.all.last %>
- <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: Recipe.all.find_index(@recipe) } %></p> <br>
+ <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: @recipe.id } %></p> <br>
 <% else %>
-  <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: Recipe.all.find_index(@recipe) } %> &emsp; &emsp; &emsp; &emsp; <%= link_to "Next Recipe", "#", class: "js-next", data: { id: Recipe.all.find_index(@recipe) } %> &rarr;</p> <br>
+  <p>&larr; <%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: @recipe.id } %> &emsp; &emsp; &emsp; &emsp; <%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %> &rarr;</p> <br>
 <% end %>
 
 <% if current_user.id == @recipe.user_id %>
   <%= link_to "Delete Recipe", @recipe, method: :delete %>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+ $(function () {
+   $(".js-next").on("click", function(e) {
+    e.preventDefault();
+    alert("You are here");
+   });
+
+   $(".js-prev").on("click", function(e) {
+     e.preventDefault();
+     var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
+     $.get("/recipes/" + prevId + ".json", function(json) {
+      debugger
+     });
+   });
+ });
+</script>
+
+
+
+<script type="text/javascript" charset="utf-8">
+// Do not use below code and delete when updated ajax implemented
+//$(function () {
+  //$(".js-next").on("click", function(event) {
+    //event.preventDefault();
+    //var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    //$.get("/products/" + nextId + ".json", function(data) {
+      //$(".productName").text(data["name"]);
+      //$(".productPrice").text(data["price"]);
+      //$(".productDescription").text(data["description"]);
+      //$(".productInventory").text(data["inventory"]);
+      // re-set the id to current on the link
+      //$(".js-next").attr("data-id", data["id"]);
+    //});
+  //});
+//});
+</script>

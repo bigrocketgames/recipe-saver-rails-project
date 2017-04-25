@@ -23,6 +23,10 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @recipe }
+      format.html { render :show }
+    end
   end
 
   def create
