@@ -17,6 +17,9 @@
   <%= link_to "Delete Recipe", @recipe, method: :delete %>
 <% end %>
 
+
+
+
 <script type="text/javascript" charset="utf-8">
  $(function () {
    if (<%= @recipe.id %> === <%= Recipe.all.first.id %>)
@@ -50,26 +53,7 @@
         $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
       }, this);
 
-       //reset the data-id to the new recipe id
-       $(".js-next").attr("data-id", json["id"]);
-       $(".js-prev").attr("data-id", json["id"]);
-
-      if (json["id"] === <%= Recipe.all.first.id %>)
-      {
-        $(".js-next").show();
-        $("#link-span").hide();
-        $(".js-prev").hide();
-      } else if (json["id"] === <%= Recipe.all.last.id %>) 
-      {
-        $(".js-next").hide();
-        $("#link-span").hide();
-        $(".js-prev").show();
-      } else 
-      {
-        $(".js-next").show();
-        $("#link-span").show();
-        $(".js-prev").show();
-      }
+       setLinks(json["id"]);
     });
    });
 
@@ -86,16 +70,21 @@
         $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
       }, this);
 
-       //reset the data-id to the new recipe id
-       $(".js-next").attr("data-id", json["id"]);
-       $(".js-prev").attr("data-id", json["id"]);
+      setLinks(json["id"]);
+     });
+   });
 
-      if (json["id"] === <%= Recipe.all.first.id %>)
+   var setLinks = function(id) {
+      //reset the data-id to the new recipe id
+       $(".js-next").attr("data-id", id);
+       $(".js-prev").attr("data-id", id);
+
+      if (id === <%= Recipe.all.first.id %>)
       {
         $(".js-next").show();
         $("#link-span").hide();
         $(".js-prev").hide();
-      } else if (json["id"] === <%= Recipe.all.last.id %>) 
+      } else if (id === <%= Recipe.all.last.id %>) 
       {
         $(".js-next").hide();
         $("#link-span").hide();
@@ -106,8 +95,6 @@
         $("#link-span").show();
         $(".js-prev").show();
       }
-      
-     });
-   });
+   }
  });
 </script>
