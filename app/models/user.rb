@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:github]
 
   has_many :recipes
+  has_many :reviews
   has_many :collections, foreign_key: :cook_id
   has_many :foods, through: :collections, class_name: 'Recipe'
 

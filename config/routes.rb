@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   root 'static#home', as: 'home'
   get '/recipes/most_collected', to: 'recipes#most_collected'
 
-  resources :recipes, only: [:index, :show, :destroy]
+  resources :recipes, only: [:index, :destroy]
+  resources :recipes, only: [:show] do
+    resources :reviews, only: [:create]
+  end
 
   resources :user, only: [:show] do
     resources :collections, only: [:index, :show, :new, :create, :edit, :update]
