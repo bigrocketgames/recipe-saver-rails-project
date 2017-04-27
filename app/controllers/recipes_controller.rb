@@ -23,6 +23,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @review = Review.new
     respond_to do |format|
       format.json { render json: @recipe, include: '**' }
       format.html { render :show }
