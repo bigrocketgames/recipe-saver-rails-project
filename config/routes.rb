@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
   end
 
+  resources :reviews, only: [:show]
+
   resources :user, only: [:show] do
     resources :collections, only: [:index, :show, :new, :create, :edit, :update]
     resources :recipes, only: [:index, :show, :new, :create, :edit, :update]
