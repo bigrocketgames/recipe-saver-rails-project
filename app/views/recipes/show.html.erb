@@ -42,36 +42,40 @@
    $(".js-next").on("click", function(e) {
     e.preventDefault();
     var nextId = parseInt($(".js-prev").attr("data-id")) + 1;
-     $.get("/recipes/" + nextId + ".json", function(json) {
-       $("#recipe-name").text(json["name"]);
-       $("#recipe-description").text(json["description"]);
-       $("#recipe-instructions").text(json["instructions"]);
-       $("#ingredient-list").empty();
-       var quantityArr = json["quantities"];
-       quantityArr.forEach(function(q) {
-        $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
-      }, this);
-
-       setLinks(json["id"]);
-    });
+    getNextData(nextId);
    });
 
    $(".js-prev").on("click", function(e) {
      e.preventDefault();
      var prevId = parseInt($(".js-prev").attr("data-id")) - 1;
-     $.get("/recipes/" + prevId + ".json", function(json) {
-       $("#recipe-name").text(json["name"]);
-       $("#recipe-description").text(json["description"]);
-       $("#recipe-instructions").text(json["instructions"]);
-       $("#ingredient-list").empty();
-       var quantityArr = json["quantities"];
-       quantityArr.forEach(function(q) {
-        $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
-      }, this);
-
-      setLinks(json["id"]);
-     });
+     getPrevData(prevId);
    });
+
+   var getNextData = function(id) {
+    $.get("/recipes/" + id + ".json", function(json) {
+    })
+      .done(function (json) {
+          setData(json);
+          setLinks(json["id"]);
+      })
+      .fail(function() {
+        id++;
+        getNextData(id);
+      })
+   };
+
+   var getPrevData = function(id) {
+    $.get("/recipes/" + id + ".json", function(json) {
+    })
+      .done(function (json) {
+          setData(json);
+          setLinks(json["id"]);
+      })
+      .fail(function() {
+        id--;
+        getPrevData(id);
+      })
+   };
 
    var setLinks = function(id) {
       //reset the data-id to the new recipe id
@@ -94,6 +98,17 @@
         $("#link-span").show();
         $(".js-prev").show();
       }
+   }
+
+   var setData = function(json) {
+       $("#recipe-name").text(json["name"]);
+       $("#recipe-description").text(json["description"]);
+       $("#recipe-instructions").text(json["instructions"]);
+       $("#ingredient-list").empty();
+       var quantityArr = json["quantities"];
+       quantityArr.forEach(function(q) {
+        $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
+      }, this);
    }
  });
 </script>
