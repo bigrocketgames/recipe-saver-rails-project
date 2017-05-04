@@ -1,0 +1,12 @@
+<div class="reviews_container">
+  <h2>Reviews</h2>
+  <ul class="review_list">
+    <% @recipe.reviews.each do |review| %>
+      <li class="review">
+        <h4 class="review_title"> <%= review.title %> </h4>
+        <p class="review_content"> <%= review.content %> </p>
+        <p class="review_writer"> Reviewed by: <%= review.user.email %> On: <%= review.updated_at.strftime("%m/%d/%Y") %> </p>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -19,8 +19,14 @@
 
 <%= render 'review_form' %>
 
+<%= render 'review' %>
+
 <script id="review-template" type="text/x-handlebars-template">
-  
+  <li class="review">
+    <h4 class="review_title"> {{title}} </h4>
+    <p class="review_content"> {{content}} </p>
+    <p class="review_writer"> Reviewed by: {{author_id}} On: {{updated_at}} </p>
+  </li>
 </script>
 
 <script type="text/javascript" charset="utf-8">
