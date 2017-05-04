@@ -19,6 +19,10 @@
 
 <%= render 'review_form' %>
 
+<script id="review-template" type="text/x-handlebars-template">
+  
+</script>
+
 <script type="text/javascript" charset="utf-8">
  $(function () {
    if (<%= @recipe.id %> === <%= Recipe.all.first.id %>)

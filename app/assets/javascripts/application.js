@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require cocoon
 //= require turbolinks
+//= require handlebars-v4.0.5
 //= require_tree .
