@@ -6,7 +6,9 @@ function Review(attributes) {
 };
 
 Review.prototype.renderLI = function() {
-  return Review.template(this)
+  var templateSource = $("#review-template").html()
+  var template = Handlebars.compile(templateSource);
+  return template(this)
 }
 
 Review.prototype.dateFormat = function(date) {
@@ -26,9 +28,6 @@ Review.fail = function(response) {
 }
 
 $(function () {
-  Review.templateSource = $("#review-template").html()
-  Review.template = Handlebars.compile(Review.templateSource);
-  
   $("form.new_review").on("submit", function(e) {
     e.preventDefault();
     

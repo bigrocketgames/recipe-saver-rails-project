@@ -16,7 +16,6 @@
     $.get("/recipes/" + id + ".json", function(json) {
     })
       .done(function (json) {
-          console.log(json);
           setData(json);
           setLinks(json["id"], json["user"]["id"]);
       })
