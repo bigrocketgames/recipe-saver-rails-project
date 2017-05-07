@@ -8,7 +8,7 @@ Specs:
 [X] Include at least one has_many relationship in information rendered via JSON and appended to the DOM. (ingredients on recipe show page.)
 [X] Include at least one link that loads or updates a resource without reloading the page. (recipes show page)
 [X] Translate JSON responses into js model objects. (New review posted.)
-[] At least one of the js model objects must have at least one method added by your code to the prototype.
+[X] At least one of the js model objects must have at least one method added by your code to the prototype. (dateFormat prototype function)
 
 
 [] Have a proper readme.md file.
