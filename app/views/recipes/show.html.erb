@@ -13,9 +13,7 @@
 
 <p id="view-links"><%= link_to "Previous Recipe", "#", class: "js-prev", data: { id: @recipe.id } %> <span id="link-span">&emsp; &emsp; &emsp; &emsp;</span>  <%= link_to "Next Recipe", "#", class: "js-next", data: { id: @recipe.id } %></p> <br>
 
-<% if current_user.id == @recipe.user_id %>
-  <%= link_to "Delete Recipe", @recipe, method: :delete %>
-<% end %>
+<%= link_to "Delete Recipe", @recipe, method: :delete, class: "recipe-delete" %>
 
 <%= render 'review_form' %>
 
@@ -47,8 +45,9 @@
     $.get("/recipes/" + id + ".json", function(json) {
     })
       .done(function (json) {
+          console.log(json);
           setData(json);
-          setLinks(json["id"]);
+          setLinks(json["id"], json["user"]["id"]);
       })
       .fail(function() {
         if (direction === "next") {
@@ -60,7 +59,7 @@
       })
    };
 
-   var setLinks = function(id) {
+   var setLinks = function(id, userId) {
       //reset the data-id to the new recipe id
        $(".js-next").attr("data-id", id);
        $(".js-prev").attr("data-id", id);
@@ -82,9 +81,15 @@
         $("#link-span").show();
         $(".js-prev").show();
       }
+
+      if (<%= current_user.id %> === userId) {
+        $(".recipe-delete").show();
+      } else {
+        $(".recipe-delete").hide();
+      }
    }
 
-   setLinks(<%= @recipe.id %>)
+   setLinks(<%= @recipe.id %>, <%= @recipe.user.id %>)
 
    var setData = function(json) {
        $("#recipe-name").text(json["name"]);
