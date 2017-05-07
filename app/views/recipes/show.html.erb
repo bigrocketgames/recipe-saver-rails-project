@@ -65,6 +65,7 @@
        $(".js-next").attr("data-id", id);
        $(".js-prev").attr("data-id", id);
 
+      // reset the clickable links for next and previous 
       if (id === <%= Recipe.all.first.id %>)
       {
         $(".js-next").show();
@@ -86,14 +87,24 @@
    setLinks(<%= @recipe.id %>)
 
    var setData = function(json) {
-      console.log(json);
        $("#recipe-name").text(json["name"]);
        $("#recipe-description").text(json["description"]);
        $("#recipe-instructions").text(json["instructions"]);
+       
+       // clear and reset the ingredient list
        $("#ingredient-list").empty();
        var quantityArr = json["quantities"];
        quantityArr.forEach(function(q) {
         $("ul#ingredient-list").append("<li class='ingredient-item'>" + q.amount + " - " + q.ingredient.name + "</li>");
+      }, this);
+      
+      // clear and reset the reviews list
+      $("ul.review_list").empty();
+      var reviewArr = json["reviews"];
+      reviewArr.forEach(function(r) {
+        var date = new Date(r.updated_at);
+        date_options = {day: '2-digit', month: '2-digit', year: 'numeric'};
+        $("ul.review_list").append("<li class='review'><h4 class='review_title'>" + r.title + "</h4><p class='review_content'>" + r.content + "</p><p class='review_writer'> Reviewed On: " + date.toLocaleDateString("en-US", date_options) + "</p></li>")
       }, this);
    }
  });
