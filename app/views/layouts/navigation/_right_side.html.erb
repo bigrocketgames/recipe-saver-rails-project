@@ -1,7 +1,7 @@
 <% if current_user %>
   <!-- need to make path for users to only see their own recipes -->
   <li><%= link_to "Most Collected Recipes", recipes_most_collected_path %></li>
-  <li><%= link_to "Your Recipes", user_recipes_path(current_user) %></li>
+  <li><%= link_to "Your Page", user_path(current_user) %></li>
   <li><%= link_to "Create a Recipe", new_user_recipe_path(current_user) %></li>
   <li><%= link_to "Your Collections", user_collections_path(current_user) %></li>
   <li><%= link_to "Sign Out", destroy_user_session_path, method: "delete" %></li>
