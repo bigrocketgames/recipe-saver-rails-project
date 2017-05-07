@@ -10,9 +10,6 @@ Specs:
 [X] Translate JSON responses into js model objects. (New review posted.)
 [X] At least one of the js model objects must have at least one method added by your code to the prototype. (dateFormat prototype function)
 
-
-[] Have a proper readme.md file.
-
 Confirm
 
 [X] You have a large number of small Git commits

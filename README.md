@@ -1,24 +1,11 @@
-# README
+Title: Recipe Saver
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Description: A site to manage your recipes and find great ones from other users as well.
 
-Things you may want to cover:
+Getting Started: Sign up for an account either with your email address, or your github account.  Once you are signed up and logged in, simply begin browsing the site and use the handy navigation links to create get to where you would like to go.
 
-* Ruby version
+Technical details: Ruby version 2.4.0 (rails 5.0.1), sqlite3 database, devise and omniauth-github for authentaction;
 
-* System dependencies
+Contributing: I love to hear feedback and things that you would like to see in the application.  Please contact me to let me know the fun and exciting features you would like to see.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+License: If this was a fully functional online application, it would be copyrighted by my company :)
