@@ -10,7 +10,6 @@ Review.prototype.renderLI = function() {
 }
 
 Review.prototype.dateFormat = function(date) {
-  console.log("I am in");
   options = {day: '2-digit', month: '2-digit', year: 'numeric'};
   return date.toLocaleDateString("en-US", options);
 }
@@ -26,15 +25,12 @@ Review.fail = function(response) {
   console.log("Something isn't working", response);
 }
 
-$(function() {
+$(function () {
   Review.templateSource = $("#review-template").html()
   Review.template = Handlebars.compile(Review.templateSource);
-})
-
-$(function () {
+  
   $("form.new_review").on("submit", function(e) {
     e.preventDefault();
-    console.log("I stole the default event.");
     
     var $form = $(this);
     var action = $form.attr("action");
