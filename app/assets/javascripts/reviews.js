@@ -1,16 +1,16 @@
 function Review(attributes) {
   var date = new Date(attributes.updated_at);
-  this.author_id = attributes.user_id;
   this.title = attributes.title;
   this.content = attributes.content;
-  this.updated_at = Review.dateFormat(date);
+  this.updated_at = this.dateFormat(date);
 };
 
 Review.prototype.renderLI = function() {
   return Review.template(this)
 }
 
-Review.dateFormat = function(date) {
+Review.prototype.dateFormat = function(date) {
+  console.log("I am in");
   options = {day: '2-digit', month: '2-digit', year: 'numeric'};
   return date.toLocaleDateString("en-US", options);
 }
@@ -34,6 +34,7 @@ $(function() {
 $(function () {
   $("form.new_review").on("submit", function(e) {
     e.preventDefault();
+    console.log("I stole the default event.");
     
     var $form = $(this);
     var action = $form.attr("action");

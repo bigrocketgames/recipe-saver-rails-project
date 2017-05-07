@@ -5,7 +5,7 @@
       <li class="review">
         <h4 class="review_title"> <%= review.title %> </h4>
         <p class="review_content"> <%= review.content %> </p>
-        <p class="review_writer"> Reviewed by: <%= review.user.email %> On: <%= review.updated_at.strftime("%m/%d/%Y") %> </p>
+        <p class="review_writer"> Reviewed On: <%= review.updated_at.strftime("%m/%d/%Y") %> </p>
       </li>
     <% end %>
   </ul>
