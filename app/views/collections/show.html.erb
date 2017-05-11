@@ -1,6 +1,10 @@
 <h1><%= @collection.name %></h1>
 <% @collection.recipes.each do |r| %>
   <ul>
-    <li><%= link_to "#{r.name}", recipe_path(r) %></li>
+    <li><%= link_to "#{r.name}", recipe_path(r), class: "recipe-link" %></li>
   </ul>
 <% end %>
+
+<div class="recipe-details">
+ 
+</div>
