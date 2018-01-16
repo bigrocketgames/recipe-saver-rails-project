@@ -1,5 +1,5 @@
 function renderIngredients(quantities) {
-    var ingredientList = ``;
+    var ingredientList = nil;
     quantities.forEach(function(q) {
         ingredientList += `<li class="ingredient">${q.amount} ${q.ingredient.name}</li>`;
     }, this);
